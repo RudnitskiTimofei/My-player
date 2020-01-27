@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">My player</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="choose_song">Выбрать исполнителя</string>
+    <string name="title">Название композиции</string>
+    <string name="name">Исполнитель</string>
+    <string name="genre">Жанр</string>
+    <string name="image_description">Image main activity</string>
+    <string-array name="name_list">
+        <item>Выберите исполнителя</item>
+        <item>Океан Эльзы</item>
+        <item>Руки вверх</item>
+        <item>Мираж</item>
+    </string-array>
+    <string-array name="genre_list">
+        <item>Выберите жанр</item>
+        <item>Rock</item>
+        <item>Pop</item>
+        <item>Dance</item>
+
+    </string-array>
+
 </resources>

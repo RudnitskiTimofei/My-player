@@ -1,21 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="by.it.trudnitski.myplayer">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="by.it.trudnitski.myplayer"
+    tools:ignore="GoogleAppIndexingWarning">
+
+    <permission android:name="by.it.trudnitski.myplayer.helper.provider.READWRITE" />
+
+    <uses-permission android:name="by.it.trudnitski.myplayer.helper.provider.READWRITE" />
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <service
+            android:name=".helper.PlayerService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <activity android:name=".activity.ChooseTrackActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".helper.MyContentProvider"
+            android:authorities="by.it.trudnitski.myplayer.helper.provider"
+            android:exported="true"
+            android:readPermission="by.it.trudnitski.myplayer.helper.provider"
+            android:writePermission="by.it.trudnitski.myplayer.helper.provider" />
     </application>
 
 </manifest>
