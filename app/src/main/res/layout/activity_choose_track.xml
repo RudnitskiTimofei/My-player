@@ -20,7 +20,7 @@
 
     <Spinner
         android:id="@+id/spinner_genre"
-        android:layout_width="@dimen/margin_size_404dp"
+        android:layout_width="@dimen/margin_size_409dp"
         android:layout_height="@dimen/margin_size_44dp"
         android:layout_marginTop="@dimen/margin_size_44dp"
         android:entries="@array/genre_list"

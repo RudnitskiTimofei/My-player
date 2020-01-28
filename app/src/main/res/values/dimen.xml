@@ -2,13 +2,13 @@
 <resources>
     <dimen name="text_size_15sp">15sp</dimen>
     <dimen name="margin_size_100dp">100dp</dimen>
-    <dimen name="margin_size_9dp">pdp</dimen>
+    <dimen name="margin_size_9dp">9dp</dimen>
     <dimen name="margin_size_7dp">7dp</dimen>
     <dimen name="margin_size_56dp">56dp</dimen>
     <dimen name="margin_size_80dp">80dp</dimen>
     <dimen name="margin_size_384dp">384dp</dimen>
-    <dimen name="margin_size_287">287dp</dimen>
-    <dimen name="margin_size_16">16dp</dimen>
+    <dimen name="margin_size_287dp">287dp</dimen>
+    <dimen name="margin_size_16dp">16dp</dimen>
     <dimen name="margin_size_409dp">409dp</dimen>
     <dimen name="margin_size_39dp">39dp</dimen>
     <dimen name="margin_size_44dp">44dp</dimen>

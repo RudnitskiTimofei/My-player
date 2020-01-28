@@ -1,12 +1,9 @@
 package by.it.trudnitski.myplayer.activity;
 
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,11 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import by.it.trudnitski.myplayer.R;
-import by.it.trudnitski.myplayer.helper.ContractClass;
-import by.it.trudnitski.myplayer.helper.DataBaseHelper;
 import by.it.trudnitski.myplayer.helper.PlayerService;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String EXTRA_MESSAGE_NAME = "name";
+    private static final String EXTRA_MESSAGE_TITLE = "title";
+    private static final String EXTRA_MESSAGE_GENRE = "genre";
+    private static final String EXTRA_MESSAGE_PLAY = "play";
+    private static final String BROADCAST_MESSAGE = "broadcast";
     TextView title;
     TextView name;
     TextView genre;
@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String nameIntent;
     String titleIntent;
     String genreIntent;
+    LocalBroadcastManager manager;
+    BroadcastReceiver broadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,30 +51,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonPause.setOnClickListener(this);
         buttonStop.setOnClickListener(this);
         buttonChoose.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                nameIntent = intent.getExtras().getString("name");
-                titleIntent = intent.getExtras().getString("title");
-                genreIntent = intent.getExtras().getString("genre");
+                nameIntent = intent.getExtras().getString(EXTRA_MESSAGE_NAME);
+                titleIntent = intent.getExtras().getString(EXTRA_MESSAGE_TITLE);
+                genreIntent = intent.getExtras().getString(EXTRA_MESSAGE_GENRE);
                 name.setText(nameIntent);
                 title.setText(titleIntent);
                 genre.setText(genreIntent);
-                startService(new Intent(context, PlayerService.class).putExtra("title", titleIntent).putExtra("play", 11));
+                startService(new Intent(context, PlayerService.class).putExtra(EXTRA_MESSAGE_TITLE, titleIntent).putExtra(EXTRA_MESSAGE_PLAY, 11));
             }
         };
-        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("broadcast"));
+        manager = LocalBroadcastManager.getInstance(this);
+
+        manager.registerReceiver(receiver, new IntentFilter(BROADCAST_MESSAGE));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        manager.unregisterReceiver(broadcastReceiver);
     }
 
     @Override
     public void onClick(View v) {
         if (v == buttonPlay) {
-            startService(new Intent(this, PlayerService.class).putExtra("play", 25));
+            startService(new Intent(this, PlayerService.class).putExtra(EXTRA_MESSAGE_PLAY, 25));
         } else if (v == buttonPause) {
-            startService(new Intent(this, PlayerService.class).putExtra("play", 15));
+            startService(new Intent(this, PlayerService.class).putExtra(EXTRA_MESSAGE_PLAY, 15));
         } else if (v == buttonStop) {
-            startService(new Intent(this, PlayerService.class).putExtra("play", 10));
+            startService(new Intent(this, PlayerService.class).putExtra(EXTRA_MESSAGE_PLAY, 10));
         } else if (v == buttonChoose) {
             startActivity(new Intent(this, ChooseTrackActivity.class));
         }

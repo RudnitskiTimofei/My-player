@@ -1,15 +1,16 @@
 package by.it.trudnitski.myplayer.activity;
 
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,8 +22,16 @@ import by.it.trudnitski.myplayer.helper.ContractClass;
 import by.it.trudnitski.myplayer.helper.Song;
 import by.it.trudnitski.myplayer.helper.SongAdapter;
 
-public class ChooseTrackActivity extends AppCompatActivity {
+public class ChooseTrackActivity extends AppCompatActivity implements SongAdapter.OnSongsListener {
 
+    private static final String EXTRA_MESSAGE_NAME = "name";
+    private static final String EXTRA_MESSAGE_TITLE = "title";
+    private static final String EXTRA_MESSAGE_GENRE = "genre";
+    private static final String BROADCAST_MESSAGE = "broadcast";
+    private final static String LOG_MYLOG = "MY LOG";
+    private final static String SONG_ADD = "Song add";
+    private final static String CHOOSE_ARTIST = "Выберите исполнителя";
+    private final static String CHOOSE_GENRE = "Выберите жанр";
     List<Song> data;
     List<Song> temp;
     RecyclerView recyclerView;
@@ -30,16 +39,9 @@ public class ChooseTrackActivity extends AppCompatActivity {
     Spinner genreSpinner;
     Cursor mCursor;
     LinearLayoutManager manager = new LinearLayoutManager(this);
-    String[] projection = {
-            ContractClass.Songs._ID,
-            ContractClass.Songs.COLUMN_NAME_NAME,
-            ContractClass.Songs.COLUMN_NAME_TITLE,
-            ContractClass.Songs.COLUMN_NAME_GENRE
+    String[] projection = {ContractClass.Songs._ID, ContractClass.Songs.COLUMN_NAME_NAME,
+            ContractClass.Songs.COLUMN_NAME_TITLE,  ContractClass.Songs.COLUMN_NAME_GENRE
     };
-    private final static String LOG_MYLOG = "MY LOG";
-    private final static String SONG_ADD = "Song add";
-    private final static String CHOOSE_ARTIST = "Выберите исполнителя";
-    private final static String CHOOSE_GENRE = "Выберите жанр";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class ChooseTrackActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String select_name = nameSpinner.getSelectedItem().toString();
                 temp = changeList(select_name, (ArrayList<Song>) data);
-                recyclerView.setAdapter(new SongAdapter(temp));
+                recyclerView.setAdapter(new SongAdapter(temp, ChooseTrackActivity.this));
             }
 
             @Override
@@ -70,7 +72,7 @@ public class ChooseTrackActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String select_genre = genreSpinner.getSelectedItem().toString();
                 temp = changeList(select_genre, (ArrayList<Song>) data);
-                recyclerView.setAdapter(new SongAdapter(temp));
+                recyclerView.setAdapter(new SongAdapter(temp, ChooseTrackActivity.this));
             }
 
             @Override
@@ -114,8 +116,20 @@ public class ChooseTrackActivity extends AppCompatActivity {
     }
 
     @Override
+    public void OnSongsClick(int position) {
+
+        Intent intent = new Intent(BROADCAST_MESSAGE);
+        intent.putExtra(EXTRA_MESSAGE_NAME, temp.get(position).getmName());
+        intent.putExtra(EXTRA_MESSAGE_TITLE, temp.get(position).getmTitle());
+        intent.putExtra(EXTRA_MESSAGE_GENRE, temp.get(position).getmGenre());
+        LocalBroadcastManager.getInstance(ChooseTrackActivity.this).sendBroadcast(intent);
+        finish();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mCursor.close();
     }
+
 }
