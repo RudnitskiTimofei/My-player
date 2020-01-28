@@ -25,7 +25,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-
     @NonNull
     @Override
     public SongAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,7 +43,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.nameView.setText(mData.get(position).getmName());
         holder.titleView.setText(mData.get(position).getmTitle());
         holder.genreView.setText(mData.get(position).getmGenre());
-
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,10 +51,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 intent.putExtra("title", mData.get(position).getmTitle());
                 intent.putExtra("genre", mData.get(position).getmGenre());
                 LocalBroadcastManager.getInstance(v.getContext()).sendBroadcast(intent);
-
             }
         });
-
     }
 
     @Override

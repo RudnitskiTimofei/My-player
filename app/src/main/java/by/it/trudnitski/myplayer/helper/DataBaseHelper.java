@@ -12,9 +12,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private Context mContext;
 
     private static final int DB_VERSION = 1;
+    private static final String DB_NAME = "Player";
+    private static final String MY_LOG = "My log";
 
     public DataBaseHelper(Context context){
-        super(context, "PLAYER", null, DB_VERSION);
+        super(context, DB_NAME, null, DB_VERSION);
         mContext = context;
     }
 
@@ -27,15 +29,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "genre TEXT," +
                 "audio_id INTEGER)");
         insertSongs(db, "Океан Эльзы", "Long time ago", "Rock", R.raw.lont_time_ago );
-        insertSongs(db, "Мираж", "На неби був", "Pop", R.raw.na_neby_buv );
+        insertSongs(db, "Океан Эльзы", "На неби був", "Pop", R.raw.na_neby_buv );
         insertSongs(db, "Океан Эльзы", "Ото була весна", "Rock", R.raw.oto_bula_vesna );
-        insertSongs(db, "Руки вверз", "Поезд", "Pop", R.raw.poizd );
-        insertSongs(db, "Океан Эльзы", "Там дэ нас нема", "Rock", R.raw.tam_de_nas_nema );
-        insertSongs(db, "Руки вверх", "Той дэнь", "Rock", R.raw.toi_den );
+        insertSongs(db, "Океан Эльзы", "Поезд", "Pop", R.raw.poizd );
+        insertSongs(db, "Океан Эльзы", "Там дэ нас нема", "Pop", R.raw.tam_de_nas_nema );
+        insertSongs(db, "Океан Эльзы", "Той дэнь", "Rock", R.raw.toi_den );
         insertSongs(db, "Океан Эльзы", "Видпусты", "Pop", R.raw.vidpusty );
-        insertSongs(db, "Мираж", "Вона", "Rock", R.raw.vona );
-        insertSongs(db, "Океан Эльзы", "Вставай", "Rock", R.raw.vstavai );
-        Log.d("my log", "DB is create");
+        insertSongs(db, "Океан Эльзы", "Вона", "Rock", R.raw.vona );
+        insertSongs(db, "Океан Эльзы", "Вставай", "Pop", R.raw.vstavai );
+        insertSongs(db, "Руки вверх", "Чужие губы", "Dance", R.raw.chuzhie_guby);
+        insertSongs(db, "Руки вверх", "Выпускной", "Dance", R.raw.vypusknoi );
+        insertSongs(db, "Руки вверх", "Крошка моя", "Dance", R.raw.kroshka_moya );
+        insertSongs(db, "Звери", "Районы кварталы", "Pop", R.raw.raiony_kvartaly );
+        insertSongs(db, "Звери", "Люба", "Pop", R.raw.lyuba );
+        Log.d(MY_LOG, "DB is create");
     }
 
     @Override

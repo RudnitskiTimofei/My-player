@@ -29,8 +29,6 @@ public class ChooseTrackActivity extends AppCompatActivity {
     Spinner nameSpinner;
     Spinner genreSpinner;
     Cursor mCursor;
-    String select;
-    ChooseTrackActivity activity;
     LinearLayoutManager manager = new LinearLayoutManager(this);
     String[] projection = {
             ContractClass.Songs._ID,
@@ -38,48 +36,47 @@ public class ChooseTrackActivity extends AppCompatActivity {
             ContractClass.Songs.COLUMN_NAME_TITLE,
             ContractClass.Songs.COLUMN_NAME_GENRE
     };
+    private final static String LOG_MYLOG = "MY LOG";
+    private final static String SONG_ADD = "Song add";
+    private final static String CHOOSE_ARTIST = "Выберите исполнителя";
+    private final static String CHOOSE_GENRE = "Выберите жанр";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_track);
         nameSpinner = findViewById(R.id.spinner_name);
-        nameSpinner.setPrompt("Выберите исполнителя");
         genreSpinner = findViewById(R.id.spinner_genre);
-        genreSpinner.setPrompt("Выберите жанр");
         recyclerView = findViewById(R.id.list);
-        recyclerView.setLayoutManager(manager);
-        ContentResolver contentResolver = getContentResolver();
-        mCursor = contentResolver.query(ContractClass.Songs.CONTENT_URI, projection,
-                null, null, null, null);
-        initializeData();
 
+        nameSpinner.setPrompt(CHOOSE_ARTIST);
+        genreSpinner.setPrompt(CHOOSE_GENRE);
+        recyclerView.setLayoutManager(manager);
+        initializeData();
         nameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String select_name = nameSpinner.getSelectedItem().toString();
-                Toast.makeText(getApplicationContext(), "You chose " + select, Toast.LENGTH_SHORT).show();
                 temp = changeList(select_name, (ArrayList<Song>) data);
-                recyclerView.setAdapter(new SongAdapter( temp ));
+                recyclerView.setAdapter(new SongAdapter(temp));
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
         genreSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String select_genre = genreSpinner.getSelectedItem().toString();
-                Toast.makeText(getApplicationContext(), " You choose " + select, Toast.LENGTH_SHORT).show();
                 temp = changeList(select_genre, (ArrayList<Song>) data);
-                recyclerView.setAdapter(new SongAdapter( temp ));
+                recyclerView.setAdapter(new SongAdapter(temp));
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
     }
 
     public void initializeData() {
@@ -87,18 +84,21 @@ public class ChooseTrackActivity extends AppCompatActivity {
         String title;
         String genre;
         data = new ArrayList<>();
+        ContentResolver contentResolver = getContentResolver();
+        mCursor = contentResolver.query(ContractClass.Songs.CONTENT_URI, projection,
+                null, null, null, null);
         if (mCursor != null) {
             for (mCursor.moveToFirst(); !mCursor.isAfterLast(); ) {
                 name = mCursor.getString(mCursor.getColumnIndex(ContractClass.Songs.COLUMN_NAME_NAME));
-                Log.d("ARRAYLIST", name);
+                Log.d(LOG_MYLOG, name);
                 title = mCursor.getString(mCursor.getColumnIndex(ContractClass.Songs.COLUMN_NAME_TITLE));
-                Log.d("ARRAYLIST", title);
+                Log.d(LOG_MYLOG, title);
                 genre = mCursor.getString(mCursor.getColumnIndex(ContractClass.Songs.COLUMN_NAME_GENRE));
-                Log.d("ARRAYLIST", genre);
+                Log.d(LOG_MYLOG, genre);
                 Song song = new Song(title, name, genre);
                 data.add(song);
                 mCursor.moveToNext();
-                Log.d("ARRAYLIST", "song added\n");
+                Log.d(LOG_MYLOG, SONG_ADD + "\n");
             }
         }
     }
@@ -112,7 +112,6 @@ public class ChooseTrackActivity extends AppCompatActivity {
         }
         return temp;
     }
-
 
     @Override
     protected void onDestroy() {

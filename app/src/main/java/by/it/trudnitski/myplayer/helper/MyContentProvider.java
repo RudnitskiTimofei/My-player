@@ -32,7 +32,6 @@ public class MyContentProvider extends ContentProvider {
                     ContractClass.Songs.DEFAULT_PROJECTION[i]);
         }
     }
-
     DataBaseHelper dbHelper;
     SQLiteDatabase db;
 

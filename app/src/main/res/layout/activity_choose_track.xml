@@ -9,9 +9,9 @@
 
     <Spinner
         android:id="@+id/spinner_name"
-        android:layout_width="409dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="@dimen/margin_size_409dp"
+        android:layout_height="@dimen/margin_size_39dp"
+        android:layout_marginTop="@dimen/margin_size_44dp"
         android:entries="@array/name_list"
         android:spinnerMode="dialog"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,9 +20,9 @@
 
     <Spinner
         android:id="@+id/spinner_genre"
-        android:layout_width="404dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="@dimen/margin_size_404dp"
+        android:layout_height="@dimen/margin_size_44dp"
+        android:layout_marginTop="@dimen/margin_size_44dp"
         android:entries="@array/genre_list"
         android:spinnerMode="dialog"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,8 +32,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
-        android:layout_width="365dp"
-        android:layout_height="524dp"
+        android:layout_width="@dimen/margin_size_365dp"
+        android:layout_height="@dimen/margin_size_524dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
