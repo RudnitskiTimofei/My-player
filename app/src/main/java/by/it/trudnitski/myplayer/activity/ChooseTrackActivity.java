@@ -32,14 +32,14 @@ public class ChooseTrackActivity extends AppCompatActivity implements SongAdapte
     private final static String SONG_ADD = "Song add";
     private final static String CHOOSE_ARTIST = "Выберите исполнителя";
     private final static String CHOOSE_GENRE = "Выберите жанр";
-    List<Song> data;
-    List<Song> temp;
-    RecyclerView recyclerView;
-    Spinner nameSpinner;
-    Spinner genreSpinner;
-    Cursor mCursor;
-    LinearLayoutManager manager = new LinearLayoutManager(this);
-    String[] projection = {ContractClass.Songs._ID, ContractClass.Songs.COLUMN_NAME_NAME,
+    private List<Song> data;
+    private List<Song> temp;
+    private RecyclerView recyclerView;
+    private Spinner nameSpinner;
+    private Spinner genreSpinner;
+    private Cursor mCursor;
+    private LinearLayoutManager manager = new LinearLayoutManager(this);
+    private String[] projection = {ContractClass.Songs._ID, ContractClass.Songs.COLUMN_NAME_NAME,
             ContractClass.Songs.COLUMN_NAME_TITLE,  ContractClass.Songs.COLUMN_NAME_GENRE
     };
 
@@ -108,7 +108,7 @@ public class ChooseTrackActivity extends AppCompatActivity implements SongAdapte
     public ArrayList<Song> changeList(String select, ArrayList<Song> list) {
         ArrayList<Song> temp = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getmGenre().equals(select) || list.get(i).getmName().equals(select)) {
+            if (list.get(i).getGenre().equals(select) || list.get(i).getName().equals(select)) {
                 temp.add(list.get(i));
             }
         }
@@ -117,19 +117,12 @@ public class ChooseTrackActivity extends AppCompatActivity implements SongAdapte
 
     @Override
     public void OnSongsClick(int position) {
-
         Intent intent = new Intent(BROADCAST_MESSAGE);
-        intent.putExtra(EXTRA_MESSAGE_NAME, temp.get(position).getmName());
-        intent.putExtra(EXTRA_MESSAGE_TITLE, temp.get(position).getmTitle());
-        intent.putExtra(EXTRA_MESSAGE_GENRE, temp.get(position).getmGenre());
+        intent.putExtra(EXTRA_MESSAGE_NAME, temp.get(position).getName());
+        intent.putExtra(EXTRA_MESSAGE_TITLE, temp.get(position).getTitle());
+        intent.putExtra(EXTRA_MESSAGE_GENRE, temp.get(position).getGenre());
         LocalBroadcastManager.getInstance(ChooseTrackActivity.this).sendBroadcast(intent);
+        mCursor.close();
         finish();
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mCursor.close();
-    }
-
 }

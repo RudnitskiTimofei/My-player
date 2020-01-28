@@ -32,16 +32,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     }
 
     @Override
-    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-    }
-
-    @Override
     public void onBindViewHolder(@NonNull final SongAdapter.ViewHolder holder, final int position) {
 
-        holder.nameView.setText(mData.get(position).getmName());
-        holder.titleView.setText(mData.get(position).getmTitle());
-        holder.genreView.setText(mData.get(position).getmGenre());
+        holder.nameView.setText(mData.get(position).getName());
+        holder.titleView.setText(mData.get(position).getTitle());
+        holder.genreView.setText(mData.get(position).getGenre());
     }
 
     @Override
@@ -49,13 +44,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         return mData != null ? mData.size() : 0;
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView nameView;
-        TextView titleView;
-        TextView genreView;
-        CardView cardView;
-        OnSongsListener mOnSongsListener;
+        private final TextView nameView;
+        private final TextView titleView;
+        private final TextView genreView;
+        private final CardView cardView;
+        private final OnSongsListener mOnSongsListener;
 
         ViewHolder(@NonNull View itemView, OnSongsListener onSongsListener) {
             super(itemView);
@@ -71,8 +65,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         public void onClick(View v) {
             mOnSongsListener.OnSongsClick(getAdapterPosition());
         }
-
     }
+
     public interface OnSongsListener {
         void OnSongsClick(int position);
     }

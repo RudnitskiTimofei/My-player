@@ -8,6 +8,8 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 
+import androidx.annotation.Nullable;
+
 import by.it.trudnitski.myplayer.R;
 
 public class PlayerService extends Service {
@@ -19,7 +21,7 @@ public class PlayerService extends Service {
     private final static int START_MESSAGE = 11;
     AudioManager audioManager;
     MediaPlayer mediaPlayer;
-    int res;
+
 
     @Override
     public void onCreate() {
@@ -31,6 +33,7 @@ public class PlayerService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         int play = intent.getExtras().getInt(KEY_ON_START);
+        int res=0;
         switch (play) {
             case START_MESSAGE:
                 mediaPlayer.stop();
@@ -61,11 +64,7 @@ public class PlayerService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
+    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;

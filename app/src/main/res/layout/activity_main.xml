@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constaint_layout"
@@ -44,8 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_size_56dp"
-        android:text="@string/play"
         android:onClick="onClick"
+        android:text="@string/play"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/button_pause" />
 
@@ -54,8 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_size_80dp"
-        android:text="@string/pause"
         android:onClick="onClick"
+        android:text="@string/pause"
         app:layout_constraintEnd_toStartOf="@+id/button_stop"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toEndOf="@+id/button_play"
@@ -67,8 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_size_80dp"
         android:layout_marginEnd="@dimen/margin_size_56dp"
-        android:text="@string/stop"
         android:onClick="onClick"
+        android:text="@string/stop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genre" />
 
@@ -79,10 +78,10 @@
         android:text="@string/choose_song"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_stop"
-        app:layout_constraintVertical_bias="0.468" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -90,10 +89,10 @@
         android:layout_height="@dimen/margin_size_287dp"
         android:layout_marginTop="@dimen/margin_size_16dp"
         android:contentDescription="@string/image_description"
-    app:layout_constraintBottom_toTopOf="@+id/title"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.481"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:srcCompat="@drawable/dubai"/>
+        app:layout_constraintBottom_toTopOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dubai" />
 </androidx.constraintlayout.widget.ConstraintLayout>

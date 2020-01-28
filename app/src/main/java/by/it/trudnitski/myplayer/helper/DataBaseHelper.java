@@ -9,7 +9,6 @@ import android.util.Log;
 import by.it.trudnitski.myplayer.R;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
-    private Context mContext;
 
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "Player";
@@ -17,7 +16,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public DataBaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
-        mContext = context;
     }
 
     @Override

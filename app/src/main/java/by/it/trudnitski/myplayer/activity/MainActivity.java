@@ -21,18 +21,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String EXTRA_MESSAGE_GENRE = "genre";
     private static final String EXTRA_MESSAGE_PLAY = "play";
     private static final String BROADCAST_MESSAGE = "broadcast";
-    TextView title;
-    TextView name;
-    TextView genre;
-    Button buttonPlay;
-    Button buttonPause;
-    Button buttonStop;
-    Button buttonChoose;
-    String nameIntent;
-    String titleIntent;
-    String genreIntent;
-    LocalBroadcastManager manager;
-    BroadcastReceiver broadcastReceiver;
+    private TextView title;
+    private TextView name;
+    private TextView genre;
+    private Button buttonPlay;
+    private Button buttonPause;
+    private Button buttonStop;
+    private Button buttonChoose;
+    private String nameIntent;
+    private String titleIntent;
+    private String genreIntent;
+    private LocalBroadcastManager manager;
+    private BroadcastReceiver broadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
         BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -70,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
         manager = LocalBroadcastManager.getInstance(this);
-
         manager.registerReceiver(receiver, new IntentFilter(BROADCAST_MESSAGE));
     }
 
@@ -91,11 +89,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v == buttonChoose) {
             startActivity(new Intent(this, ChooseTrackActivity.class));
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 }
 

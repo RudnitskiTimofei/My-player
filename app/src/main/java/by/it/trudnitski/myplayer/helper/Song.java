@@ -4,35 +4,37 @@ public class Song {
     private String mName;
     private String mTitle;
     private String mGenre;
-
+//serializable
     public Song(String title, String name, String genre) {
         mTitle = title;
         mName = name;
         mGenre = genre;
     }
 
-    public String getmName() {
+    public String getName() {
         return mName;
     }
 
-    public String getmTitle() {
+    public String getTitle() {
         return mTitle;
     }
 
-    public String getmGenre() {
+    public String getGenre() {
         return mGenre;
     }
 
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public void setmName(String name) {
+        mName = name;
     }
 
-    public void setmTitle(String mTitle) {
-        this.mTitle = mTitle;
+    public void setmTitle(String title) {
+        mTitle = title;
     }
 
-    public void setmGenre(String mGenre) {
-        this.mGenre = mGenre;
+    public void setmGenre(String genre) {
+        mGenre = genre;
     }
+
+    //equalse, hashcode, toString, убрать this
 }

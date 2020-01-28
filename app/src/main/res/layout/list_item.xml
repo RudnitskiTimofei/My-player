@@ -20,6 +20,7 @@
             android:layout_gravity="center_horizontal"
             android:textSize="@dimen/text_size_15sp"
             />
+
         <TextView
             android:id="@+id/list_title"
             android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
             android:layout_gravity="center_horizontal"
             android:textSize="@dimen/text_size_15sp"
             />
+
         <TextView
             android:id="@+id/list_genre"
             android:layout_height="wrap_content"
@@ -34,7 +36,5 @@
             android:layout_gravity="center_horizontal"
             android:textSize="@dimen/text_size_15sp"
             />
-
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +21,10 @@ public class MyContentProvider extends ContentProvider {
     private static HashMap<String, String> mSongsProjectionMap;
     private static final int SONGS = 1;
     private static final int SONGS_ID = 2;
+    private static final String MY_LOG = "My log";
 
+    DataBaseHelper dbHelper;
+    SQLiteDatabase db;
     static {
         mUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         mUriMatcher.addURI(ContractClass.AUTHORITY, "songs", SONGS);
@@ -32,8 +36,6 @@ public class MyContentProvider extends ContentProvider {
                     ContractClass.Songs.DEFAULT_PROJECTION[i]);
         }
     }
-    DataBaseHelper dbHelper;
-    SQLiteDatabase db;
 
     @Override
     public boolean onCreate() {
@@ -61,14 +63,15 @@ public class MyContentProvider extends ContentProvider {
                 }
                 break;
             default:
-                throw new IllegalArgumentException("Wrong Uri: " + uri);
+                Log.d(MY_LOG, "Wrong uri");
+                Toast.makeText(getContext(), "Wrong uri", Toast.LENGTH_SHORT).show();
+                //Log
         }
         db = dbHelper.getWritableDatabase();
         Cursor cursor = db.query(ContractClass.Songs.TABLE_NAME, projection,
                 selection, selectionArgs, null, null, sortOrder);
         cursor.setNotificationUri(getContext().getContentResolver(), ContractClass.Songs.CONTENT_URI);
         return cursor;
-
     }
 
     @Nullable
@@ -81,6 +84,7 @@ public class MyContentProvider extends ContentProvider {
                 return ContractClass.Songs.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalArgumentException("Wrong Uri" + uri);
+                //Log
         }
     }
 
@@ -89,6 +93,7 @@ public class MyContentProvider extends ContentProvider {
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
         if (mUriMatcher.match(uri) != SONGS) {
             throw new IllegalArgumentException("Wrong Uri:" + uri);
+            //Log
         }
         db = dbHelper.getWritableDatabase();
         if (values != null) {
